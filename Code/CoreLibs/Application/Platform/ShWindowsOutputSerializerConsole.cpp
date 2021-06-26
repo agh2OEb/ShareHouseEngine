@@ -1,4 +1,5 @@
 #include "ShWindowsOutputSerializerConsole.h"
+#include "ShStringUtils.h"
 
 SH_NAMESPACE_BEGIN
 
@@ -30,12 +31,12 @@ String CategoryToString(EAlarm category)
 	return Output;
 }
 // FOutputDevice interface.
-void WindowsOutputSerializerConsole::Serialize(const String& category, const String& output, EAlarm alarm)
+void WindowsOutputSerializerConsole::Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm)
 {
-	Serialize(category, output, alarm, 0);
+	Serialize(category, funcName, line, output, alarm, 0);
 }
 
-void WindowsOutputSerializerConsole::Serialize(const String& category, const String& output, EAlarm alarm, const double time)
+void WindowsOutputSerializerConsole::Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm, const double time)
 {
 	// time will be supported after implementing Timer System.
 
@@ -43,13 +44,15 @@ void WindowsOutputSerializerConsole::Serialize(const String& category, const Str
 	{
 		SetColor(alarm);
 		static uint32 LogLine = 0;
+		String funcNameCopy(funcName.c_str());
+		ShStringUtils::GetFileNameWithoutPath(funcNameCopy);
 
-		String recordedTime((  std::to_string(LogLine) + " " + category.c_str() + " ] " + CategoryToString(alarm).c_str()  + " [ Time :  " +  std::to_string(time) + " ] -> ").c_str());
-		recordedTime += output;
-		recordedTime += "\n";
+		String fileInfo;
+		//String recordedTime(( std::to_string(LogLine) + " " + category.c_str() + " ] " +  + " [ Time :  " +  std::to_string(time) + " ]-> ").c_str());
+		ShStringUtils::MakeString(fileInfo, "[%s] %s (%d line) - %s \n", CategoryToString(alarm).c_str(), funcNameCopy.c_str(), line, output.c_str());
 
 		uint32 written;
-		WriteConsole(mConsoleHandle, recordedTime.c_str(), recordedTime.length(), (::DWORD*) & written, nullptr);
+		WriteConsole(mConsoleHandle, fileInfo.c_str(), fileInfo.length(), (::DWORD*) & written, nullptr);
 	}
  }
 

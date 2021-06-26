@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+Project File/CoreLibs/Debug/CoreLibs.log
+Project File/CoreLibs/Debug/CoreLibs.tlog/CoreLibs.lastbuildstate
+Project File/CoreLibs/Debug/CoreLibs.tlog/unsuccessfulbuild
+*.log

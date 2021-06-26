@@ -929,7 +929,7 @@ inline float Math::Random(float minimum, float maximum) {
 
 inline float Math::SmoothStep(float edge0, float edge1, float x) {
     float t = Clamp01((x - edge0) / (edge1 - edge0));
-    return t * t * (3.0 - 2.0 * t);
+    return t * t * (3.f - 2.f * t);
 }
 
 template <typename T>

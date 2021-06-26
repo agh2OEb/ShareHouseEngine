@@ -24,10 +24,10 @@ public:
 	virtual ~OutputSerializer() = default;
 
 	// FOutputDevice interface.
-	virtual void Serialize(const String& category, const String& output, EAlarm alarm) = 0;
-	virtual void Serialize(const String& category, const String& output, EAlarm alarm, const double time)
+	virtual void Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm) = 0;
+	virtual void Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm, const double time)
 	{
-		Serialize(category, output, alarm);
+		Serialize(category, funcName, line, output, alarm);
 	}
 	virtual bool Initialize() { return true; }
 	virtual void Flush()	  {}

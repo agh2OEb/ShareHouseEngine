@@ -29,8 +29,8 @@ public:
 
 
 	// FOutputDevice interface.
-	virtual void Serialize(const String& category, const String& output, EAlarm alarm) override;
-	virtual void Serialize(const String& category, const String& output, EAlarm alarm, const double Time)override;
+	virtual void Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm) override;
+	virtual void Serialize(const String& category, const String& funcName, const size_t line, const String& output, EAlarm alarm, const double Time)override;
 
 	virtual bool Show(bool showWindow);
 

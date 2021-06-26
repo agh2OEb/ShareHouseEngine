@@ -10,19 +10,12 @@ class LogOutputDevice;
 struct Message
 {
 	template <typename FmtType, typename... Types>
-	static void Log(const String& category, EAlarm alarm, const FmtType& fmt, Types... args)
+	static void Log(const String& category, const String& funcName, const size_t line, EAlarm alarm, const FmtType& fmt, Types... args)
 	{
 		static auto Logger = LogOutputDevice::GetLogger();
 		if (Logger.IsValid())
 		{
-			// double time = GetTime();
-			//Logger.GetSerializer()->Serialize(category, Print(fmt, args...), alarm,  time);
-
-			Logger.GetSerializer()->Serialize(category, Print(fmt, args...), alarm);
-		}
-		else
-		{
-
+			Logger.GetSerializer()->Serialize(category, funcName, line, Print(fmt, args...), alarm);
 		}
 	}
 

@@ -39,6 +39,6 @@ public:
 };
 
 #define SH_LOG(category, alarm, fmt, ...)\
-		ShareHouse::Message::Log(String(#category ), EAlarm::alarm, fmt,  ##__VA_ARGS__);\
+		ShareHouse::Message::Log(String(#category ), String(__FILE__), __LINE__, EAlarm::alarm, fmt,  ##__VA_ARGS__);\
 
 SH_NAMESPACE_END
