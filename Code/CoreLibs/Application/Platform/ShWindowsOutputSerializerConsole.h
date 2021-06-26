@@ -28,6 +28,7 @@ public:
 	}
 
 
+	// FOutputDevice interface.
 	virtual void Serialize(const String& category, const String& output, EAlarm alarm) override;
 	virtual void Serialize(const String& category, const String& output, EAlarm alarm, const double Time)override;
 
